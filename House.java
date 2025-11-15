@@ -9,11 +9,13 @@ import java.util.ArrayList;
 public class House extends Building implements HouseRequirements{
   protected ArrayList<Student> residents;
   protected boolean hasDiningRoom;
+  protected boolean hasElevator;
   // constructor
-public House(String name, String Address, int nFloors, boolean hasDiningRoom){
+public House(String name, String Address, int nFloors, boolean hasDiningRoom, boolean hasElevator){
   super(name, Address, nFloors);
   this.residents=new ArrayList<Student>();
   this.hasDiningRoom=hasDiningRoom;
+  this.hasElevator=hasElevator;
   System.out.println("You have built a house: 🏠");
 }
 /**
@@ -23,6 +25,27 @@ public House(String name, String Address, int nFloors, boolean hasDiningRoom){
 public boolean hasDiningRoom()
 {
   return this.hasDiningRoom;
+}
+/**
+* Checks if the house has an elevator.
+* @return true if there is an elevator in the house and false otherwise
+*/
+public boolean hasElevator()
+{
+  return this.hasDiningRoom;
+}
+/**
+* allows movements across the floors if the house has the elevator.
+* @param destination floor number 
+* @param house elevator status( function call)
+*/
+public void goToFloor(int n, boolean hasElevator){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+  else{
+    throw new RuntimeException("This house does not have an elevator.");
+  }
 }
 /**
 * Returns the number of residents in the house.
@@ -70,12 +93,19 @@ public Student moveOut(Student s){
     throw new RuntimeException(s + " is not in this house");
   }
 }
+/** Method helps in getting the options for house accessibility 
+ * 
+ * 
+*/
+public void showOptions() {
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)");
+    }
 
 
 
 /* This is a stub for the House class */
   public static void main(String[] args) {
-    House myHouse= new House("Cutter","10 Prospect Street",3,true);
+    House myHouse= new House("Cutter","10 Prospect Street",3,true,true);
   }
 
 }
