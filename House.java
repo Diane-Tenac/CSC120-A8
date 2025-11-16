@@ -11,12 +11,16 @@ public class House extends Building implements HouseRequirements{
   protected boolean hasDiningRoom;
   protected boolean hasElevator;
   // constructor
-public House(String name, String Address, int nFloors, boolean hasDiningRoom, boolean hasElevator){
+public House(String name, String Address, int nFloors, boolean hasDiningRoom){
   super(name, Address, nFloors);
   this.residents=new ArrayList<Student>();
   this.hasDiningRoom=hasDiningRoom;
-  this.hasElevator=hasElevator;
+  
   System.out.println("You have built a house: 🏠");
+}
+// constructor overload for the elevator update
+public House(boolean hasElevator){
+this.hasElevator=hasElevator;
 }
 /**
 * Checks if the house has a dining room.
@@ -97,15 +101,17 @@ public Student moveOut(Student s){
  * 
  * 
 */
+// Override the showOptions method to include House-specific options
 public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)");
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)+  moveIn()+moveOut()");
     }
 
 
 
 /* This is a stub for the House class */
   public static void main(String[] args) {
-    House myHouse= new House("Cutter","10 Prospect Street",3,true,true);
+    House myHouse= new House("Cutter","10 Prospect Street",3,true);
+    House myHouse1=new House(true);
   }
 
 }

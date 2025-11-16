@@ -9,6 +9,19 @@ public class Cafe extends Building implements CafeRequirements {
     private int nSugarPackets;
     private int nCreams; 
     private int nCups;
+    /** constructor with only the name
+     * @param name
+     */
+    public Cafe(String name){
+        super(name);
+    }
+    /** constructor overload with both name and the address
+     * @param name
+     * @param address
+     */
+    public Cafe(String name, String Address){
+        super(name, Address);
+    }
 
     public Cafe(String name, String Address, int nFloors){
         super(name, Address, nFloors);
@@ -35,7 +48,7 @@ public void sellCoffee(int size, int nSugarPackets, int nCreams){
     this.nCups-=1;
 }
 /**
- *  updates inventory when necessary by.
+ *  updates inventory when necessary by .
  *
  * @param nCoffeeOunces the number of coffee ounces
  * @param nSugarPackets number of sugar packets to be added
@@ -48,10 +61,21 @@ private void restock(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCup
     this.nCreams+=nCreams;
     this.nCups+=nCups;
 }
+/**
+ * Overrind the show options
+ * no parameter
+ */
+public void showOptions(){
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)+ sellCoffee(size,# sugarPacks,# Creams, # cups)");
+}
 
     
     public static void main(String[] args) {
         Cafe myCafe= new Cafe("Campus Center Cafe","100 Elm street",2);
+        myCafe.activeFloor=1;
+        myCafe.sellCoffee(12,3,2);
+        
+
     }
     
 }

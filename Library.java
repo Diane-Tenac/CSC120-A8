@@ -2,6 +2,7 @@
 
 
 import java.util.Hashtable;
+import javax.management.RuntimeErrorException;
 /**
  *  * The Library class represents a collection that that stores the books and their status using  Hashtable.
 * it is storing each book's title and author (concatenated together as one `String`, as the `key`, 
@@ -9,11 +10,17 @@ import java.util.Hashtable;
  */
 public class Library extends Building implements LibraryRequirements{
   private Hashtable<String, Boolean> collection;
+  boolean hasElevator;
 
     public Library(String name, String Address, int nFloors) {
       super(name, Address, nFloors);
       this.collection= new Hashtable<String,Boolean>();
       System.out.println("You have built a library: 📖");
+    }
+    // overloading the constructor to check if there is elevator access
+    public Library(boolean hasElevator){
+      this.hasElevator=hasElevator;
+
     }
 /**
  * adds the title of the book that serves as the key.
@@ -43,6 +50,22 @@ public class Library extends Building implements LibraryRequirements{
     this.collection.put(title, false);
 
   }
+   /** 
+  * Checks out multiple books of the same title and updates their status using the boolean.
+ * makes the status of the book to be false
+ * @param title
+ * @param quantity
+ */
+public void checkOut(String title, int quantity){
+  if (quantity<1){
+    throw new RuntimeException("Quantity must be at least 1.");
+  }
+  for (int i=0; i<quantity; i++){
+    this.collection.put(title, false);
+  }
+}
+
+    
    /** 
   * Checks in the  of the book and updates its status using the boolean.
  * makes the status of the book to be true
@@ -74,8 +97,27 @@ public class Library extends Building implements LibraryRequirements{
  */
   public boolean isAvailable(String title){
     if (this.collection.get(title)==true){
+    
       return true;
+      }  
+    
+    else{
+      return false;
     }
+  }
+  //overloaded function2
+  /**
+   * Checks if two different books are availlable in the collection
+   * @param title1
+   * @param title2
+   * @return status
+   */
+  public boolean isAvailable(String title1, String title2){
+    if (this.collection.get(title1)==true){
+      if (this.collection.get(title2)==true){
+        return true;
+      }  
+    
     else{
       return false;
     }
@@ -85,7 +127,7 @@ public class Library extends Building implements LibraryRequirements{
  *
  * No parameter
  */
-  public void printCollection(){
+public void printCollection(){
     for (String title: this.collection.keySet()){
       System.out.println(title+" "+"status"+" "+this.collection.get(title));
 
@@ -94,6 +136,10 @@ public class Library extends Building implements LibraryRequirements{
   
     public static void main(String[] args) {
       Library myLibrary= new Library("Neilson", "Nelson Dr 102", 4);
+      Library myLibraryandElevator= new Library(true);
+      myLibrary.enter();
+      myLibraryandElevator.goToFloor(3);
+      
     }
   
   }
