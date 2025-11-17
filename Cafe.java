@@ -22,6 +22,17 @@ public class Cafe extends Building implements CafeRequirements {
     public Cafe(String name, String Address){
         super(name, Address);
     }
+    /**
+     * Overloaded constructor with the name, address, # floors and the has elevator confirmation
+     * @param name
+     * @param Address
+     * @param nFloors
+     * @param hasElevator
+     */
+    public Cafe(String name, String Address, int nFloors, boolean hasElevator){
+        super(name, Address, nFloors);
+        this.hasElevator=hasElevator;
+    }
 
     public Cafe(String name, String Address, int nFloors){
         super(name, Address, nFloors);
@@ -62,7 +73,7 @@ private void restock(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCup
     this.nCups+=nCups;
 }
 /**
- * Overrind the show options
+ * Overring the show options
  * no parameter
  */
 public void showOptions(){
@@ -71,7 +82,9 @@ public void showOptions(){
 
     
     public static void main(String[] args) {
-        Cafe myCafe= new Cafe("Campus Center Cafe","100 Elm street",2);
+        Cafe myCafe= new Cafe("Campus Center Cafe","100 Elm street",2,true);
+        myCafe.showOptions();
+        myCafe.goToFloor(5);
         myCafe.activeFloor=1;
         myCafe.sellCoffee(12,3,2);
         

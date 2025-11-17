@@ -12,7 +12,7 @@ public class Library extends Building implements LibraryRequirements{
   private Hashtable<String, Boolean> collection;
   boolean hasElevator;
   /**
-   * Oveloaded Library constructor that is 
+   * Oveloaded Library constructor with name and address
    * @param name
    * @param Address
    */
@@ -38,6 +38,7 @@ public class Library extends Building implements LibraryRequirements{
  */
   public void addTitle(String title){
     this.collection.put(title, true);
+    System.out.println("the Title "+ title + " has been added");
 
   }
   /** 
@@ -46,10 +47,24 @@ public class Library extends Building implements LibraryRequirements{
  * @param title
  */
   public String removeTitle(String title){
-    this.collection.remove(title);
+    if (this.collection.containsKey(title)){
+      if (isAvailable(title)){
+          
+     this.collection.remove(title);
+    System.out.println("the book titled "+title+" is now removed");
     return title;
 
   }
+  else{
+    throw new RuntimeException(" unavaillable book can not be removed");
+  }
+
+      }
+      else{
+        throw new RuntimeException("The book that doesn't belong to the library can not be removed");
+      }
+    }
+    
   /** 
   * Checks out the  of the book and updates its status using the boolean.
  * makes the status of the book to be false
@@ -57,6 +72,7 @@ public class Library extends Building implements LibraryRequirements{
  */
   public void checkOut(String title){
     this.collection.put(title, false);
+    
 
   }
    /** 
@@ -105,9 +121,8 @@ public void checkOut(String title, int quantity){
  * @return true if the specific title(book) is available in the collection and false otherwise
  */
   public boolean isAvailable(String title){
-    if (this.collection.get(title)==true){
-    
-      return true;
+    if(this.collection.get(title)==true){
+        return true;
       }  
     
     else{
@@ -120,15 +135,29 @@ public void checkOut(String title, int quantity){
    * @param title
    * @return status
    */
-  public boolean isAvailable(String title){
-    if(this.collection.get(title)==true){
-        return true;
+  
+  /*public boolean isAvailable(String title1,String title2){// Theoretically This is working in my mind. I am not sure of why it's failing codewise that is why I chose to leave them as a comment.
+    if (this.collection.get(title1)){
+        if (this.collection.get(title2)){
+    
+      return true;
       }  
+    }
+   
     
     else{
+      System.out.println( " one or both books are not available. Check one by one instead");
       return false;
     }
-  }
+  } */
+ @Override
+ public void showOptions() {
+    
+      super.showOptions();
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n+  moveIn()\n+moveOut()");
+    }
+ 
+
      /** 
   * Prints the collection and the status
  *
@@ -144,9 +173,10 @@ public void printCollection(){
     public static void main(String[] args) {
       Library myLibrary= new Library("Neilson", "Nelson Dr 102", 4);
       Library myLibraryandElevator= new Library(true);
-      myLibrary.enter();
+      myLibrary.showOptions();
+      myLibrary.enter();  
+      myLibrary.goUp();
       myLibraryandElevator.goToFloor(3);
       
     }
-  
-  }
+  } 
