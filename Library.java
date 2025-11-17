@@ -20,17 +20,40 @@ public class Library extends Building implements LibraryRequirements{
     super(name, Address);
 
   }
-
+/** 
+ * constructor
+ * @param name
+ * @param Address
+ * @param nFLoors
+ */
     public Library(String name, String Address, int nFloors) {
       super(name, Address, nFloors);
       this.collection= new Hashtable<String,Boolean>();
       System.out.println("You have built a library: 📖");
     }
     // overloading the constructor to check if there is elevator access
+    /** 
+     * Overloaded constructor
+     * @param hasElevator
+     */
     public Library(boolean hasElevator){
       this.hasElevator=hasElevator;
 
     }
+    /** 
+     * the constructor
+     * @param name
+     * @param Address
+     * @param nFLoor
+     * @param hasElevator
+     */
+  public Library(String name, String Address, int nFloors, boolean hasElevator) {
+      super(name, Address, nFloors);
+      this.hasElevator=hasElevator;
+      this.collection= new Hashtable<String,Boolean>();
+
+      System.out.println("You have built a library: 📖");
+    }  
 /**
  * adds the title of the book that serves as the key.
  *
