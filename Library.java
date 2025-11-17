@@ -11,6 +11,15 @@ import javax.management.RuntimeErrorException;
 public class Library extends Building implements LibraryRequirements{
   private Hashtable<String, Boolean> collection;
   boolean hasElevator;
+  /**
+   * Oveloaded Library constructor that is 
+   * @param name
+   * @param Address
+   */
+  public Library(String name, String Address){
+    super(name, Address);
+
+  }
 
     public Library(String name, String Address, int nFloors) {
       super(name, Address, nFloors);
@@ -108,13 +117,11 @@ public void checkOut(String title, int quantity){
   //overloaded function2
   /**
    * Checks if two different books are availlable in the collection
-   * @param title1
-   * @param title2
+   * @param title
    * @return status
    */
-  public boolean isAvailable(String title1, String title2){
-    if (this.collection.get(title1)==true){
-      if (this.collection.get(title2)==true){
+  public boolean isAvailable(String title){
+    if(this.collection.get(title)==true){
         return true;
       }  
     

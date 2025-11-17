@@ -11,6 +11,40 @@ public class House extends Building implements HouseRequirements{
   protected boolean hasDiningRoom;
   protected boolean hasElevator;
   // constructor
+  /**
+   * the house constuctor oveloaded  by name and the address
+   * @param name
+   * @param Address
+   */
+public House(String name, String Address){
+  super(name, Address);
+}
+/**
+ * the house constuctor oveloaded  by name, the address and the number of floors
+ * @param name
+ * @param Address
+ * @param nFloors
+ */
+public House(String name, String Address, int nFloors){
+  super(name, Address, nFloors);
+}
+/**
+ * the house constuctor oveloaded  by name and the address and an evevator access confirmation
+ * @param name
+ * @param Address
+ * @param hasElevator
+ */
+public House(String name, String Address, boolean hasElevator){
+  super(name, Address);
+  this.hasElevator=hasElevator;
+}
+  /**
+   * this is the constuctor that I had at first that I am overlooding in the lines up
+   * @param name
+   * @param Address
+   * @param nFloors
+   * @param hasDiningRoom
+   */
 public House(String name, String Address, int nFloors, boolean hasDiningRoom){
   super(name, Address, nFloors);
   this.residents=new ArrayList<Student>();
@@ -39,7 +73,21 @@ public boolean hasElevator()
   return this.hasDiningRoom;
 }
 /**
-* allows movements across the floors if the house has the elevator.
+* allows movements across the floors if the house has the elevator @override.
+* @param destination floor number 
+* @param house elevator status( function call)
+*/
+
+public void goToFloor(int n){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+  else{
+    throw new RuntimeException("This house does not have an elevator.");
+  }
+}
+/**
+* allows movements across the floors if the house has the elevator overloaded.
 * @param destination floor number 
 * @param house elevator status( function call)
 */
@@ -103,7 +151,7 @@ public Student moveOut(Student s){
 */
 // Override the showOptions method to include House-specific options
 public void showOptions() {
-        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)+  moveIn()+moveOut()");
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n+  moveIn()\n+moveOut()");
     }
 
 
@@ -112,6 +160,15 @@ public void showOptions() {
   public static void main(String[] args) {
     House myHouse= new House("Cutter","10 Prospect Street",3,true);
     House myHouse1=new House(true);
+    House myHouse3= new House("lamont", "20 Prospect St",true);
+    myHouse3.enter();//the running test is true that this house (from the constructor it doesn't show the # of floors)
+    myHouse.showOptions();
+    myHouse.enter();
+    //myHouse.goUp();
+    //myHouse.goDown();
+    //myHouse3.goToFloor(3);
+    myHouse.goToFloor(2, true);
+    myHouse3.goToFloor(2,true);//this is running expectedly because this object doesn't have its number of floors declared
   }
 
 }
