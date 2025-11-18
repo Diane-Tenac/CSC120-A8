@@ -9,6 +9,7 @@ public class Cafe extends Building implements CafeRequirements {
     private int nSugarPackets;
     private int nCreams; 
     private int nCups;
+    private boolean hasElevator;
     /** constructor with only the name
      * @param name
      */
@@ -71,6 +72,31 @@ private void restock(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCup
     this.nSugarPackets+=nSugarPackets;
     this.nCreams+=nCreams;
     this.nCups+=nCups;
+}
+ /**
+  * Moves to non adjascent floor only when the there is an elevator in the bulding
+  * @param floor#
+  */
+public void goToFloor(int n){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+else{
+    throw new RuntimeException("The "+ this.name+ " does not have an elevator.");
+  }
+}
+/**
+* allows movements across the floors if the Cafe has the elevator overloaded.
+* @param destination floor number 
+* @param house elevator status( function call)
+*/
+public void goToFloor(int n, boolean hasElevator){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+  else{
+    throw new RuntimeException("The "+ this.name+ " does not have an elevator.");
+  }
 }
 /**
  * Overring the show options

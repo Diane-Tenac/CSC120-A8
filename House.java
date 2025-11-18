@@ -57,6 +57,22 @@ public House(boolean hasElevator){
 this.hasElevator=hasElevator;
 }
 /**
+   * this is the constuctor that builds the house (overloading)
+   * @param name
+   * @param Address
+   * @param nFloors
+   * @param hasDiningRoom
+   * @param hasElevator
+   */
+public House(String name, String Address, int nFloors, boolean hasDiningRoom, boolean hasElevator){
+  super(name, Address, nFloors);
+  this.residents=new ArrayList<Student>();
+  this.hasDiningRoom=hasDiningRoom;
+  this.hasElevator=hasElevator;
+  
+  System.out.println("You have built a house: 🏠");
+}
+/**
 * Checks if the house has a dining room.
 * @return true if there is a dining room and false otherwise
 */
@@ -159,7 +175,6 @@ public void showOptions() {
 /* This is a stub for the House class */
   public static void main(String[] args) {
     House myHouse= new House("Cutter","10 Prospect Street",3,true);
-    House myHouse1=new House(true);
     House myHouse3= new House("lamont", "20 Prospect St",true);
     myHouse3.enter();//the running test is true that this house (from the constructor it doesn't show the # of floors)
     myHouse.showOptions();

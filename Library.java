@@ -173,11 +173,36 @@ public void checkOut(String title, int quantity){
       return false;
     }
   } */
+ /**
+  * Moves to non adjascent floor only when the there is an elevator in the bulding
+  * @param floor#
+  */
+ public void goToFloor(int n){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+  else{
+    throw new RuntimeException("The "+ this.name+ " does not have an elevator.");
+  }
+}
+/**
+* allows movements across the floors if the library has the elevator overloaded.
+* @param destination floor number 
+* @param house elevator status( function call)
+*/
+public void goToFloor(int n, boolean hasElevator){
+  if (hasElevator==true){
+    super.goToFloor(n);
+  }
+  else{
+    throw new RuntimeException("The "+ this.name+ " does not have an elevator.");
+  }
+}
  @Override
  public void showOptions() {
     
       super.showOptions();
-        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n+  moveIn()\n+moveOut()");
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n+ + exit() \\n" + " + removeTitle() \n" + " + addTitle()\n" +"  checkOutBook()\n+returnBook()");
     }
  
 
